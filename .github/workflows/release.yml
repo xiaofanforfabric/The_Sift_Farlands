@@ -1,0 +1,51 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 25
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "25"
+
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v4
+
+      - name: Derive version from tag
+        id: version
+        run: echo "value=${GITHUB_REF_NAME#v}" >> "$GITHUB_OUTPUT"
+
+      - name: Build
+        run: ./gradlew build --no-daemon -Pmod_version=${{ steps.version.outputs.value }}
+
+      - name: Publish release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ github.ref_name }}
+          name: Sift Farlands ${{ steps.version.outputs.value }}
+          body: |
+            ## Install
+
+            1. Minecraft **26.3** with Fabric Loader 0.19.5+ and Fabric API
+            2. **The Sift 1.1.2+**
+            3. Drop `sift-farlands-*.jar` into `mods/`
+
+            Far Lands begin at `max(abs(x), abs(z)) >= 3,081,840` in The Sift
+            dimension. Terrain inside that radius, and the vanilla Overworld, is
+            unchanged.
+          files: build/libs/sift-farlands-${{ steps.version.outputs.value }}.jar
+          fail_on_unmatched_files: true
