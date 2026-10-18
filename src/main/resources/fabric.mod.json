@@ -1,0 +1,32 @@
+{
+	"schemaVersion": 1,
+	"id": "sift_farlands",
+	"version": "${version}",
+	"name": "Sift Farlands",
+	"description": "Genuine Far Lands in The Sift dimension through real 32-bit integer overflow. Terrain is unchanged until max(|x|, |z|) reaches 3,081,840 blocks.",
+	"authors": [
+		"xiaofanforfabric"
+	],
+	"contact": {
+		"homepage": "https://github.com/xiaofanforfabric/The_Sift_Farlands",
+		"sources": "https://github.com/xiaofanforfabric/The_Sift_Farlands",
+		"issues": "https://github.com/xiaofanforfabric/The_Sift_Farlands/issues"
+	},
+	"license": "MIT",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"mielon.siftfarlands.SiftFarlands"
+		]
+	},
+	"mixins": [
+		"sift_farlands.mixins.json"
+	],
+	"depends": {
+		"fabricloader": ">=0.19.5",
+		"minecraft": "~26.3",
+		"java": ">=25",
+		"fabric-api": ">=0.160.5+26.3",
+		"the_sift": ">=1.1.2"
+	}
+}

@@ -1,0 +1,13 @@
+{
+	"required": true,
+	"package": "mielon.siftfarlands.mixin",
+	"compatibilityLevel": "JAVA_25",
+	"mixins": [
+		"GradientNoiseMixin",
+		"NoiseFunctionMixin",
+		"NoiseFunctionSamplerMixin"
+	],
+	"injectors": {
+		"defaultRequire": 1
+	}
+}
